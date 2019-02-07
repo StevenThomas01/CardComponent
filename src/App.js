@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Button from './Button';
+
+// Rule: Result is a html element and any attributes are accessed via props.
+const Result = (props) => {
+  return(<div>{props.counter}</div>)
+}
 
 class App extends Component {
+  state = {counter: 0};
+
+  // Rule: incrementCounter is an arrow function.
+  incrementCounter = (incrementValue) => {
+    this.setState((prevState) => ({ 
+  		counter: prevState.counter + incrementValue 
+    }))
+  };
+
   render() {
+    // Rule: attributes are properties and are accessed via e.g. this.props.onClickFunction (used within the control)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Button incrementValue={1} onClickFunction={this.incrementCounter} /> 
+        <Button incrementValue={5} onClickFunction={this.incrementCounter} />
+        <Result counter={this.state.counter}/>
       </div>
     );
   }
 }
 
+// Rule: 'export' doesn't work when append to class within VS Code.
 export default App;
