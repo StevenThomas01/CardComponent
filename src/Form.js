@@ -12,6 +12,7 @@ class Form extends Component {
         Axios.get(`https://api.github.com/users/${this.state.userName}`)
         .then(resp => {
             this.props.onSubmit(resp.data);
+            this.setState({ userName: ''});
         });
     };
 

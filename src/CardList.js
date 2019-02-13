@@ -20,7 +20,7 @@ class CardList extends Component {
     return (
     <div>
       {/* Rule: within class, need this.props keyword!!! */}
-      { this.props.cards.map(card => <Card {...card} />) }
+      { this.props.cards.map(card => <Card key={card.id} {...card} />) }
     </div>
   );
   }
