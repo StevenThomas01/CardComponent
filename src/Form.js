@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Axios from 'axios';
 
 class Form extends Component {
     state = { userName: '' };
@@ -8,7 +8,12 @@ class Form extends Component {
         // prevents form from refreshing
         event.preventDefault();
         console.log('Event: Form Submit', this.state.userName);
-    }
+        // Rule: Need different apostrophy
+        Axios.get(`https://api.github.com/users/${this.state.userName}`)
+        .then(resp => {
+            this.props.onSubmit(resp.data);
+        });
+    };
 
     render() {
         return(
